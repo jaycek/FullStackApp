@@ -1,0 +1,39 @@
+
+.navbar {
+    padding: 40px 0;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    animation-name: Fadein;
+    animation-duration: 1.5s ;
+
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+
+.links ul {
+  display:flex;
+  gap:1rem; 
+}
+
+.links ul li {
+    list-style: none;
+    display: inline-block;
+    
+}
+
+.links ul li a {
+    text-decoration: none;
+   
+    font-family: "Inter";
+    transition: 0.5s color ease;
+    /* height: 100%; */
+    font-size: 1.1em;
+}
+
+.links ul li a:hover {
+    color:hsl(5, 85%, 63%) ;
+}
