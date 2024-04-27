@@ -10,6 +10,7 @@ import Root from './Root.jsx'
 import SignupForm from './SignupForm.jsx'
 import NewBlog from './NewBlog.jsx'
 import Blogs from './Blogs.jsx'
+import LoginForm from './LoginForm.jsx'
 
 const router= createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router= createBrowserRouter([
       {
         path:'/blogs',
         element:<Blogs />
+      },
+      {
+        path:'/login',
+        element:<LoginForm />
       }
 
     ]

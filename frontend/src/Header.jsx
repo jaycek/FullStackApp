@@ -3,6 +3,10 @@ import {Link} from 'react-router-dom'
 import './Header.css'
 
 const Header = () => {
+
+  const tokenRelease=()=>{
+    sessionStorage.removeItem('userToken')
+  }
   return (
     <div>
       <header className='navbar'>
@@ -19,6 +23,12 @@ const Header = () => {
                 </li>
                 <li className='link'>
                     <Link to='/signup'>Sign Up</Link>
+                </li>
+                <li className='link'>
+                    <Link to='/login'>Login</Link>
+                </li>
+                <li className='link'>
+                    <Link to='/' onClick={tokenRelease}>Logout</Link>
                 </li>
             </ul>
         </nav>

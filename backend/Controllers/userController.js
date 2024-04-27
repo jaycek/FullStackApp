@@ -1,5 +1,6 @@
 import User from "../Models/userModel.js"
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 const addUser = async (req,res)=>{
 
@@ -30,6 +31,27 @@ const addUser = async (req,res)=>{
       
   }
 
+  const login = async (req,res)=>{
+    try {
+      const {email,password} = req.body
+      const user = await User.findOne({email:email})
+      if(!user){
+        return res.status(500).json({message:"User not found"})
+      }
+      const isValid = await bcrypt.compare(password,user.password)
+      console.log(isValid)
+      if(!isValid){
+        return res.status(500).json({message:"Invalid credentials"})
+      }
+      let payload={user:email,pwd:password};
+      let token = jwt.sign(payload,'reactblogapp')
+
+      res.status(200).json({message:"Login successful",token:token})
+    } catch (error) {
+      console.log(error)
+    res.status(500).json({error:'Internal Server error'})
+    }
+  }
 const getUsers = async (req,res)=>{
   try {
     
@@ -89,4 +111,4 @@ const deleteUser = async (req,res)=>{
   }
 }
 
-  export {getUsers,getUserByUserName,addUser,updateUserbyId,deleteUser}
+  export {login,getUsers,getUserByUserName,addUser,updateUserbyId,deleteUser}

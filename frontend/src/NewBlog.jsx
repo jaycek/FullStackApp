@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 import './NewBlog.css'
+import { useNavigate } from 'react-router-dom'
 
 const NewBlog = () => {
 
@@ -8,6 +9,7 @@ const NewBlog = () => {
     const [title,setTitle] = useState('')
     const [subtitle,setSubTitle] = useState('')
     const [desc,setDesc] = useState('')
+    const navigate = useNavigate()
 
     const handleImageChange = (e)=>{
         setImage(e.target.files[0]);
@@ -23,14 +25,22 @@ const NewBlog = () => {
         formData.append('desc',desc)
   
         try {
-            const response= await axios.post("http://localhost:3000/posts",
-            formData,{
-                headers:{
-                    'Content-Type':'multipart/form-data'
+            const token = sessionStorage.getItem('userToken')
+            if(token){
+                const response= await axios.post("http://localhost:3000/posts",
+                formData,{
+                    headers:{
+                        'Content-Type':'multipart/form-data',
+                        'Authorization':`Bearer ${token}`
+                    }
                 }
+            )
+            console.log(response.data)
             }
-        )
-        console.log(response.data)
+            else{
+                navigate('/login')
+            }
+            
         } catch (error) {
             console.log(error)
         }

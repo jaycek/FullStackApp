@@ -2,6 +2,7 @@ import React ,{useState} from 'react'
 import './Signup.css'
 import axios from 'axios'
 
+
 const SignupForm = () => {
 
     const [formData,setFormData] = useState({
@@ -20,7 +21,7 @@ const SignupForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try{
-            const response = await axios.post("http://localhost:3000/signup",formData);
+            const response = await axios.post("http://localhost:3000/users",formData);
             console.log(response.data)
         }catch(error){
             console.error(error)
